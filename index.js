@@ -136,7 +136,7 @@ app.post('/chatroom',(req,res)=>{
 
 
 //server listen
-http.listen(4000, function() {
+http.listen(process.env.PORT || 4000, function() {
   console.log('listening on port 4000')
   serverHealth.message='server is running'
 })
