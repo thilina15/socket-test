@@ -5,7 +5,6 @@ function getChatRooms(userID){
     return new Promise((resolve,reject)=>{
         var chatRoomIDs =[]
         var uid = mongoose.Types.ObjectId(userID)
-        console.log(uid);
         const db = mongoose.connection.db
     
         db.collection('chat_room').find({members:{$all:[uid]}}).stream()
