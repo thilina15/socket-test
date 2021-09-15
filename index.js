@@ -1,9 +1,11 @@
 const webSocketsServerPort = 4000;
 const webSocketServer = require('websocket').server;
 const http = require('http');
+const express = require('express')
+const app = express()
 
 // Spinning the http server and the websocket server.
-const server = http.createServer();
+const server = http.createServer(app);
 server.listen(process.env.PORT || webSocketsServerPort) ;
 console.log('listening on port 4000');
 
@@ -41,3 +43,9 @@ wsServer.on('request', function (request) {
     }
   })
 });
+
+
+
+app.get('/',(req,res)=>{
+  res.send('server is running.....')
+})
