@@ -1,17 +1,15 @@
 {
-  "name": "web-sockets",
-  "version": "1.0.0",
-  "description": "Using websockets to create a duplex communication app",
-  "main": "index.js",
+  "name": "rtm",
+  "version": "0.0.1",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "devStart": "nodemon index.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "http": "0.0.1-security",
-    "websocket": "^1.0.31"
+    "ws": "^7.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
