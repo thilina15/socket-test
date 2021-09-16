@@ -20,10 +20,17 @@ wss.on('connection', function connection(ws) {
   })
 })
 
+app.use(express.json())
+
 app.get('/',(req,res)=>{
-  res.send('server is tunning....')
+  console.log('home');
+  res.send('home route')
 })
 
+app.post('/message',(req,res)=>{
+  console.log('message route', req.body);
+  res.send('inside message route')
+})
 
 server.listen(process.env.PORT || port, function() {
   console.log(`Server is listening on ${port}!`)
