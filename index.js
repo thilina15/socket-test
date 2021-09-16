@@ -28,6 +28,7 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/message',(req,res)=>{
+  console.log(req);
   console.log('message route', req.body);
   res.send('inside message route')
 })
