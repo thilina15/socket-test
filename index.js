@@ -41,6 +41,7 @@ app.post('/disconnect',(req,res)=>{
 })
 
 app.post('/message',(req,res)=>{
+  clients[req.body.connectionID] = req.body.connectionID 
   console.log(clients);
   console.log('message route', req.body);
   res.status(200)
