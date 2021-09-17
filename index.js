@@ -7,6 +7,8 @@ const port = 6969;
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server })
 
+var clients = {}
+
 wss.on('connection', function connection(ws) {
   console.log('client connected');
   ws.socketID = 'user_id'
@@ -27,10 +29,21 @@ app.get('/',(req,res)=>{
   res.send('home route')
 })
 
+app.post('/connect',(req,res)=>{
+  clients[req.body.connectionID] = req.body.connectionID 
+  res.status(200)
+})
+
+
+app.post('/disconnect',(req,res)=>{
+  delete clients[req.body.connectionID]
+  res.status(200) 
+})
+
 app.post('/message',(req,res)=>{
-  console.log(req);
+  console.log(clients);
   console.log('message route', req.body);
-  res.send('inside message route')
+  res.status(200)
 })
 
 server.listen(process.env.PORT || port, function() {
