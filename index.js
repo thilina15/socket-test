@@ -35,11 +35,17 @@ app.post('/message',async(req,res)=>{
   clients[req.body.connectionID] = req.body.connectionID 
   console.log(clients);
   console.log('message route', req.body);
-  await client.postToConnection({
-    ConnectionId:req.body.message,
-    Data:Buffer.from(JSON.stringify({message:'reply from server'}))
-  }).promise()
-  res.status(200).send(JSON.stringify({message:'reply message'})) 
+  try{
+    await client.postToConnection({
+      ConnectionId:req.body.data.message,
+      Data:Buffer.from(JSON.stringify({message:'reply from server'}))
+    }).promise()
+    res.status(200).send(JSON.stringify({message:'reply message'})) 
+  }catch(e){
+    console.log(e);
+    res.status(200).send(JSON.stringify({message:'reply message with error'})) 
+  }
+  
 })
 
 app.listen(process.env.PORT || port, function() {
