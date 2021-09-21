@@ -1,6 +1,12 @@
-const express = require('express');
-const app = express();
+if (process.env.NODE_ENV !== 'production'){
+  require('dotenv').config()
+}
 
+
+const express = require('express');
+const aws = require('aws-sdk')
+const app = express();
+const client = new aws.ApiGatewayManagementApi({endpoint:process.env.ENDPOINT})
 const port = 6969;
 
 var clients = {}
@@ -25,10 +31,14 @@ app.post('/disconnect',(req,res)=>{
   res.status(200).send(JSON.stringify({message:'hello world'})) 
 })
 
-app.post('/message',(req,res)=>{
+app.post('/message',async(req,res)=>{
   clients[req.body.connectionID] = req.body.connectionID 
   console.log(clients);
   console.log('message route', req.body);
+  await client.postToConnection({
+    ConnectionId:req.body.message,
+    Data:Buffer.from(JSON.stringify({message:'reply from server'}))
+  }).promise()
   res.status(200).send(JSON.stringify({message:'reply message'})) 
 })
 
