@@ -5,7 +5,11 @@ if (process.env.NODE_ENV !== 'production'){
 
 const express = require('express');
 const aws = require('aws-sdk')
-aws.config.update({region:'ap-southeast-1'});
+aws.config.update({
+  region:'ap-southeast-1',
+  accessKeyId:process.env.ACCESS_KEY,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY
+});
 const app = express();
 const client = new aws.ApiGatewayManagementApi({endpoint:process.env.ENDPOINT})
 const port = 6969;
